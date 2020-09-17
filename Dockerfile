@@ -1,4 +1,4 @@
 FROM openjdk:11
-ADD target/demo-0.0.1-SNAPSHOT.jar demo-0.0.1-SNAPSHOT.jar
+COPY target/*.jar app.jar
 EXPOSE 8077
-ENTRYPOINT ["java", "-jar", "demo-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
