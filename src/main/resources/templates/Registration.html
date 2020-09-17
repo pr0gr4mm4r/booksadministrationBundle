@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrationsseite</title>
+</head>
+
+<body>
+<p>LoggeDich hier ein</p>
+<form th:action="@{/createUser}" th:object="${user}" method="post">
+    <input type="text" name="email" th:field="*{email}">
+    <input type="text" name="pass" th:field="*{password}">
+    <input type="submit" name="submit">
+</form>
+</body>
+</html>

@@ -1,0 +1,25 @@
+.explanationMargin{
+  margin-left: 7%;
+  margin-top: 4%;
+  padding-left: 6%;
+  padding-right: 6%;
+}
+
+#logo {
+  width: 22px;
+  height: auto;
+}
+
+.english{
+  font-size: 23px;
+  text-align: center;
+}
+
+h1{
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.explanationMargin :first-child{
+  text-align: center;
+}

@@ -1,0 +1,16 @@
+.officeMargin {
+  margin-left: 7%;
+  margin-top: 4%;
+}
+div.officeMargin div{
+  text-align: center;
+  margin-bottom: 20px;
+}
+h1{
+  font-size: 50px;
+  font-weight: bold;
+}
+.modal-body{
+  font-size: 120%;
+}
+::ng-deep .mat-form-field{ width:200px !important; }

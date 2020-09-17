@@ -1,0 +1,44 @@
+<app-navbar *ngIf="isAdmin"></app-navbar>
+<app-navbar *ngIf="isUser"></app-navbar>
+<app-navbar-auth *ngIf="!isAdmin && !isUser"></app-navbar-auth>
+<div class="explanationMargin">
+  <div>
+    <h1>Landing Page</h1>
+  </div>
+  <br><br>
+  <div class="english" *ngIf="english">
+    This Desktop Application serves as an Online Library of the Unic Location Karlsruhe.
+    <br>
+    <br>
+    Interacting with the <b> Navigation Bar </b> you can reach and use all implemented Functionalities.
+    <br>
+    It will adjust automatically depending on Application State and
+    the Role of the currently logged in user (<i>admin</i> or <i>user</i> is possible).
+    <br>
+    <br>
+    Logged in Users with the Role <i>user</i> will be able to get an Overview over all the Books currently stored within the Library.
+    <br>
+    The Books can be sorted by Title, Author, Publisher and Page Count.
+    <br>
+    <br>
+    Logged in Users with the Role <i>admin</i> beyond that will be able to make Changes to the Library, including Adding/ Updating and Deleting Book Entries.
+    <br>
+    Adding/ Updating Books can be performed via Google Books Api or manually via Form Submission.
+    <br>
+    The Google Books Api allows to find many Books (not all) by ISBN so that you can simply type in any ISBN of your Choice
+    in order to Add a Book to the Library or Update it in Case that a Book with this ISBN is already saved in the Library.
+    <br>
+    <br>
+    Hovering over Links and Images will show a Tool Tip providing information about the Linked Page.
+    <br>
+    <br>
+    If you click on the <img id="logo" src="../assets/unic.png"> Logo in the Top Left Corner you will be redirected to this Landing Page.
+  </div>
+  <div *ngIf="!english">
+    Diese Desktopanwendung ist die Online Bibliothek des Unic Standorts Karlsruhe.
+    Alle Funktionalitäten sind über die Navigationsleiste erreichbar,
+    die sich je nach Anwendungsstatus und Rolle des eingeloggten Benutzers (Administrator oder Benutzer ist möglich)
+    automatisch anpasst.
+    Wenn man auf das unic Logo klickt, wird man auf diese Startseite weitergeleitet.
+  </div>
+</div>

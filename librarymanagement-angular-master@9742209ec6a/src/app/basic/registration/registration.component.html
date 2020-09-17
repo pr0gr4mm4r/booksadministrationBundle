@@ -1,0 +1,79 @@
+<app-navbar-auth></app-navbar-auth>
+<div class="registerMargin">
+  <div>
+    <h1>Register</h1>
+  </div>
+  <br><br>
+  <div>
+    <label for="email">Email:&nbsp;</label>
+    <mat-form-field>
+      <input matInput type="text" id="email"
+             autocomplete="off" [(ngModel)]="user.email" name="email"
+             placeholder="enter email" required>
+    </mat-form-field>
+  </div>
+  <br>
+  <div>
+    <label for="name">User Name:&nbsp;</label>
+    <mat-form-field>
+      <input matInput type="text" id="name"
+             autocomplete="off" [(ngModel)]="user.name" name="name"
+             placeholder="enter name" required>
+    </mat-form-field>
+  </div>
+  <br>
+  <div>
+    <label for="password">Password:&nbsp;</label>
+    <mat-form-field>
+      <input matInput type="password" id="password" [(ngModel)]="user.password"
+             name="password" placeholder="enter password" required>
+    </mat-form-field>
+  </div>
+  <br>
+  <div class="form-group">
+    <label for="confirmPassword">Confirm Password:&nbsp;</label>
+    <mat-form-field>
+      <input matInput type="password" id="confirmPassword" [(ngModel)]="confirmPassword"
+             name="confirmPassword" placeholder="confirm password" required>
+    </mat-form-field>
+    <br><br><br>
+    <button class="btn btn-outline-info" data-toggle="tooltip" title="try to register"
+            (click)=registerPreparation() [disabled]="!user.email || !user.name || !user.password || !confirmPassword">
+      &nbsp;&nbsp;&nbsp;&nbsp; Register &nbsp;&nbsp;&nbsp;&nbsp;
+    </button>
+  </div>
+</div>
+
+<div class="modal" id="modal" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">information</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" [ngClass]="{
+      'alert-success':!nameMissing && !emailMissing && !this.comparePasswords(),
+      'alert-danger':nameMissing || emailMissing || this.comparePasswords()}">
+        <ng-container *ngIf="emailMissing">
+          Email <b>{{user.email}}</b> is already assigned!
+          <br>
+        </ng-container>
+        <ng-container *ngIf="nameMissing">
+          User Name <b>{{user.name}}</b> is already assigned!
+          <br>
+        </ng-container>
+        <ng-container *ngIf="comparePasswords()">
+          Passwords do not match!
+          <br>
+        </ng-container>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

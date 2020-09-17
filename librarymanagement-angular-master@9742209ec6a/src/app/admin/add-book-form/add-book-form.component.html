@@ -1,0 +1,147 @@
+<app-navbar></app-navbar>
+<div class="formMargin">
+  <div>
+    <h1>Add a Book</h1>
+  </div>
+  <br>
+  <div>
+    <label for="formISBN">ISBN:&nbsp;</label>
+    <mat-form-field>
+      <input matInput class="bookPlaceData" autocomplete="off" required
+             id="formISBN" [(ngModel)]="book.isbn" placeholder="enter ISBN (Hyphens allowed)"
+             name="formISBN" type="text"
+             pattern="^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$">
+    </mat-form-field>
+  </div>
+  <div>
+    <label for="formTitle">Title:&nbsp;</label>
+    <mat-form-field>
+      <input matInput class="bookPlaceData" autocomplete="off" required
+             id="formTitle" [(ngModel)]="book.title" name="formTitle" type="text"
+             placeholder="enter Title">
+    </mat-form-field>
+  </div>
+  <div>
+    <label for="formPublisher">Publisher:&nbsp;</label>
+    <mat-form-field>
+      <input matInput class="bookPlaceData" autocomplete="off" required
+             id="formPublisher" [(ngModel)]="book.publisher"
+             name="formPublisher" type="text" placeholder="enter Publisher">
+    </mat-form-field>
+  </div>
+  <div>
+    <label for="formDescription">Description:&nbsp;</label>
+    <mat-form-field>
+      <textarea matInput required cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"
+                cdkTextareaAutosize class="bookPlaceData" id="formDescription"
+                [(ngModel)]="book.description" name="formDescription" type="text"
+                placeholder="enter Description"></textarea>
+    </mat-form-field>
+  </div>
+  <div>
+    <label for="formAuthor">Author:&nbsp;</label>
+    <mat-form-field>
+      <input matInput required class="bookPlaceData" autocomplete="off"
+             id="formAuthor" [(ngModel)]="book.author" name="formAuthor"
+             type="text" placeholder="enter Author">
+    </mat-form-field>
+  </div>
+  <div>
+    <label for="formPageCount">Page Count:&nbsp;</label>
+    <mat-form-field>
+      <input matInput required class="bookPlaceData" autocomplete="off"
+             id="formPageCount" [(ngModel)]="book.pageCount" name="formPageCount"
+             placeholder="enter Page Count" type="number">
+    </mat-form-field>
+  </div>
+  <div>
+    <label for="formAddingDate">Adding Date:&nbsp;</label>
+    <mat-form-field appearance="standard">
+      <input matInput required class="bookPlaceData" autocomplete="off"
+             [matDatepicker]="picker"
+             id="formAddingDate" [(ngModel)]="book.addingDate" name="formAddingDate"
+             placeholder="enter Adding Date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+  </div>
+  <div>
+    <label for="formReleaseDate">Release Date:&nbsp;</label>
+    <mat-form-field autocomplete="off"  appearance="standard">
+      <input matInput required class="bookPlaceData"
+             [matDatepicker]="picker2"
+             id="formReleaseDate" [(ngModel)]="book.releaseDate" name="formReleaseDate"
+             placeholder="enter Release Date">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div>
+    <label for="formPositionDescription">Position Description:&nbsp;</label>
+    <mat-form-field>
+      <input matInput required class="bookPlaceData" autocomplete="off"
+             id="formPositionDescription" [(ngModel)]="book.positionDescription"
+             name="formPositionDescription" placeholder="enter Position Description" type="text">
+    </mat-form-field>
+  </div>
+
+  <div>
+    <ng-container *ngIf="options">
+      <label for="formOffice">Office Name:&nbsp;</label>
+      <mat-form-field>
+        <input matInput required autocomplete="off" id="formOffice"
+               [(ngModel)]="book.officeName" name="formCategory"
+               type="text" placeholder="choose Office"
+               [formControl]="myControl" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </ng-container>
+    <br><br>
+    <button id="submitBook" [disabled]="disableButtonDecision()"
+            class="btn btn-outline-info" data-toggle="tooltip"
+            data-target="#modal1" (click)="addBook()"
+            title="Try to add a Book with above entered Information" type="submit">
+      &nbsp;&nbsp;&nbsp;&nbsp;Add Book&nbsp;&nbsp;&nbsp;&nbsp;
+    </button>
+  </div>
+</div>
+
+
+<div class="modal" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="titleModal1">Information</h5>
+        <button type="button" class="close" data-dismiss="modal" (click)="resetPage()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" [ngClass]="{'alert-success':successfulSave, 'alert-danger':!successfulSave}">
+        <ng-container *ngIf="officeMissing">
+          There is no Office with Name <b>{{book.officeName}}</b> persisted.
+          <br>Do you want to redirect to Office Creation?
+        </ng-container>
+        <ng-container *ngIf="successfulSave">
+          Book successfully persisted in the Library!
+        </ng-container>
+      </div>
+      <div class="modal-footer">
+        <button *ngIf="!successfulSave" (click)="resetPage()" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button *ngIf="successfulSave" type="button" class="btn btn-secondary"
+                data-dismiss="modal">Close
+        </button>
+        <ng-container>
+          <button *ngIf="officeMissing" type="button" class="btn btn-primary" (click)="redirectToOfficeCreation()">
+            Redirect to Office Creation
+          </button>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+.loginMargin {
+  margin-left: 7%;
+  margin-top: 4%;
+}
+
+div.loginMargin div {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.modal-body {
+  font-size: 120%;
+}
+
+h1 {
+  font-size: 50px;
+  font-weight: bold;
+}

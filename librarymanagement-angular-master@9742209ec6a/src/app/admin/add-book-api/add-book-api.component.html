@@ -1,0 +1,91 @@
+<app-navbar></app-navbar>
+<div class="apiMargin">
+  <div>
+    <h1>Add a Book via API</h1>
+  </div>
+  <br>
+  <div>
+    <label for="ISBN">ISBN:&nbsp;</label>
+    <mat-form-field>
+      <input matInput autocomplete="off"
+             id="ISBN" type="text" required placeholder="Add via Google Books"
+             [(ngModel)]="ISBN" (input)="disableButtonDecision()"
+             name="ISBN" style="margin-right: 10px"
+             pattern="^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$">
+    </mat-form-field>
+  </div>
+  <div>
+    <ng-container *ngIf="options">
+      <label for="formOffice">Office Name:&nbsp;</label>
+      <mat-form-field>
+        <input matInput autocomplete="off"
+               id="formOffice" [(ngModel)]="officeName"
+               name="formOffice" type="text"
+               required placeholder="Choose Office" [formControl]="myControl"
+               [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </ng-container>
+  </div>
+  <div>
+    <label for="formPositionDescription">Position Description:&nbsp;</label>
+    <mat-form-field>
+      <input matInput autocomplete="off" class="bookPlaceData" id="formPositionDescription"
+             required placeholder="Add Position Description" [(ngModel)]="positionDescription"
+             name="formPositionDescription" type="text">
+    </mat-form-field>
+  </div>
+  <br>
+  <div>
+    <button class="addBook btn btn-outline-info" id="add" type="button" data-toggle="tooltip"
+            [disabled]="disableButtonDecision()"
+            title="try to find and add a book via Google Books Api" (click)="addBookGoogle()">
+      &nbsp;&nbsp;&nbsp;&nbsp; Add Book via API &nbsp;&nbsp;&nbsp;&nbsp;
+    </button>
+  </div>
+</div>
+
+
+<div class="modal" id="modal" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">information</h5>
+        <button *ngIf="successfulSave" (click)="resetPage()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <button *ngIf="!successfulSave" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" [ngClass]="{'alert-success':successfulSave, 'alert-danger':!successfulSave}">
+        <ng-container *ngIf="officeMissing">
+          There is no Office with Name <b>{{officeName}}</b> persisted.
+          <br>Do you want to create it, so that you can store Books there?
+        </ng-container>
+        <ng-container *ngIf="notFound">
+          No Book could be found via Google Books API.
+        </ng-container>
+        <ng-container *ngIf="unexpectedRollback">
+          An Unexpected Rollback Exception occurred.
+        </ng-container>
+        <ng-container *ngIf="successfulSave">
+          Book successfully persisted in the Library!
+        </ng-container>
+      </div>
+
+      <div class="modal-footer">
+        <button *ngIf="successfulSave" (click)="resetPage()" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button *ngIf="!successfulSave && !officeMissing" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button *ngIf="officeMissing" type="button" class="btn btn-primary" (click)="redirectToOfficeCreation()">
+          Redirect to Office Creation
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

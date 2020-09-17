@@ -1,0 +1,31 @@
+#logo {
+  width: 43px;
+  height: auto;
+  cursor: pointer;
+}
+
+#navHeading {
+  font-size: 150%;
+  color: black;
+  margin-left: 1.5%;
+  margin-right: 4%;
+}
+
+.navbar {
+  background-color: #bdf0f5;
+}
+
+.dropdown-menu{
+  background-color: #d2f5f9;
+}
+
+a:hover {
+  background-color: #a4c400;
+  color: white;
+}
+
+.navbarColor{
+  cursor: pointer;
+  color: black;
+}
+

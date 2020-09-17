@@ -1,0 +1,69 @@
+<nav class="navbar navbar-expand-md sticky-top">
+  <div class="logoMargin">
+    <span class="navbar-brand">
+      <img routerLink="/landingPage" data-toggle="tooltip" title="Redirect to Landing Page"
+           id="logo" src="../assets/unic.png">
+    </span>
+  </div>
+  <span id="navHeading" class="navbar-text" data-toggle="tooltip">
+    <b>Library of Unic Karlsruhe</b>
+  </span>
+  <ul class="navbar-nav ml-auto">
+    <li *ngIf="isAdmin" class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle navbarColor" id="navbarBookAdministry" role="button" data-toggle="dropdown"
+         data-toggle2="tooltip" title="Manipulate Library" aria-haspopup="true" aria-expanded="false">
+        Books Administry
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <a class="dropdown-item" routerLink="/addBookForm" data-toggle="tooltip"
+           title="Add a Book Entry via Form Submit">Add Book</a>
+        <a class="dropdown-item" routerLink="/addBookApi" data-toggle="tooltip"
+           title="Add a Book Entry via Google Books API">Add Book via API</a>
+        <a class="dropdown-item" routerLink="/addOffice" data-toggle="tooltip" title="Add an Office via Form Submit">
+          Add Office
+        </a>
+      </div>
+    </li>
+    <li *ngIf="!isAdmin" class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle navbarColor" id="navbarDropdownMenuLinkUser" role="button" data-toggle="dropdown"
+         data-toggle2="tooltip" title="Get Library Overview" aria-haspopup="true" aria-expanded="false">
+        Books Overview
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarBooksOverview">
+        <a class="dropdown-item" (click)="setOverviewSort('title')" routerLink="/overview" data-toggle="tooltip"
+           title="Shows Library sorted by Title">Sort by Title</a>
+        <a class="dropdown-item" (click)="setOverviewSort('author')" routerLink="/overview" data-toggle="tooltip"
+           title="Shows Library sorted by Author">Sort by Author</a>
+        <a class="dropdown-item" (click)="setOverviewSort('publisher')" routerLink="/overview" data-toggle="tooltip"
+           title="Shows Library sorted by Publisher">Sort by Publisher</a>
+        <a class="dropdown-item" (click)="setOverviewSort('page count')" routerLink="/overview" data-toggle="tooltip"
+           title="Shows Library sorted by Page Count">Sort by Page Count</a>
+      </div>
+    </li>
+    <li *ngIf="isAdmin" class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle navbarColor" id="navbarDropdownMenuLinkAdmin" role="button" data-toggle="dropdown"
+         data-toggle2="tooltip" title="Get Library Overview With Editing Option" aria-haspopup="true" aria-expanded="false">
+        Books Overview
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarBooksOverview">
+        <a class="dropdown-item" (click)="setOverviewSort('title')" routerLink="/overview" data-toggle="tooltip"
+           title="Shows Library sorted by Title with Editing Option">Sort by Title</a>
+        <a class="dropdown-item" (click)="setOverviewSort('author')" routerLink="/overview" data-toggle="tooltip"
+           title="Shows Library sorted by Author with Editing Option">Sort by Author</a>
+        <a class="dropdown-item" (click)="setOverviewSort('publisher')" routerLink="/overview" data-toggle="tooltip"
+           title="Shows Library sorted by Publisher with Editing Option">Sort by Publisher</a>
+        <a class="dropdown-item" (click)="setOverviewSort('page count')" routerLink="/overview" data-toggle="tooltip"
+           title="Shows Library sorted by Page Count with Editing Option">Sort by Page Count</a>
+      </div>
+    </li>
+
+    <li id="logoutMargin" class="nav-item dropdown">
+      <a class="nav-link navbarColor" (click)="logout()" routerLink="/login" id="Logout" role="button"
+         data-toggle="tooltip"
+         title="Instant Logout and Redirect to Login Page" aria-haspopup="true"
+         aria-expanded="false">
+        Logout
+      </a>
+    </li>
+  </ul>
+</nav>

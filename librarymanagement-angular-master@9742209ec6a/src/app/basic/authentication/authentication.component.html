@@ -1,0 +1,51 @@
+<app-navbar-auth></app-navbar-auth>
+<div class="loginMargin">
+  <div>
+    <h1>Login</h1>
+  </div>
+  <br><br>
+    <div>
+      <label for="email">Email:&nbsp;</label>
+      <mat-form-field>
+        <input matInput type="text" id="email" [ngClass]="{'loginFail':loginFail}"
+               [(ngModel)]="email" name="email" placeholder="Enter Email" required>
+      </mat-form-field>
+    </div>
+    <br>
+    <div>
+      <label for="password">Password:&nbsp;</label>
+      <i class="fas fa-lock prefix"></i>
+      <mat-form-field>
+        <input matInput type="password" id="password" [ngClass]="{'loginFail':loginFail}"
+               [(ngModel)]="password" name="password" placeholder="Enter Password" required>
+      </mat-form-field>
+      <br><br><br>
+      <button type="button" class="btn btn-outline-info"
+              data-toggle="tooltip" title="Try to log in" (click)=handleLogin()>
+        &nbsp;&nbsp;&nbsp;&nbsp;Login &nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+    </div>
+</div>
+<div class="modal" id="modal" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Information</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body alert-danger">
+         Login failed for Email <b>{{email}}</b>.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

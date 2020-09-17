@@ -1,0 +1,20 @@
+.apiMargin{
+  margin-left: 5%;
+  margin-top: 4%;
+}
+div.apiMargin div{
+  text-align: center;
+  margin-bottom: 28px;
+}
+h1{
+  font-size: 50px;
+  font-weight: bold;
+}
+.modal-body{
+  font-size: 120%;
+}
+
+::ng-deep .mat-form-field{ width:200px !important; }
+
+
+
